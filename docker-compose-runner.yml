@@ -3,12 +3,12 @@ services:
   postgres:
     image: "postgres:12"
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      POSTGRES_HOST_AUTH_METHOD: trust
 
   geth:
     image: "matterlabs/geth:latest"
     environment:
-      - PLUGIN_CONFIG=fast
+      PLUGIN_CONFIG: fast
 
   dev-ticker:
     image: "matterlabs/dev-ticker:latest"
@@ -35,11 +35,11 @@ services:
       - /usr/src/cache:/usr/src/cache
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - IN_DOCKER=true
-      - CACHE_DIR=/usr/src/cache
-      - SCCACHE_CACHE_SIZE=50g
-      - SCCACHE_GCS_BUCKET=matterlabs-infra-sccache-storage
-      - SCCACHE_GCS_OAUTH_URL=http://169.254.169.254/computeMetadata/v1/instance/service-accounts/gha-ci-runners@matterlabs-infra.iam.gserviceaccount.com/token
-      - SCCACHE_GCS_RW_MODE=READ_WRITE
-      - SCCACHE_ERROR_LOG=/tmp/sccache_log.txt
-      - CI=1
+      IN_DOCKER: "true"
+      CACHE_DIR: "/usr/src/cache"
+      SCCACHE_CACHE_SIZE: "50g"
+      SCCACHE_GCS_BUCKET: "matterlabs-infra-sccache-storage"
+      SCCACHE_GCS_OAUTH_URL: "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/gha-ci-runners@matterlabs-infra.iam.gserviceaccount.com/token"
+      SCCACHE_GCS_RW_MODE: "READ_WRITE"
+      SCCACHE_ERROR_LOG: "/tmp/sccache_log.txt"
+      CI: "1"
