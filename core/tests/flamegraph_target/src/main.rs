@@ -15,11 +15,11 @@ impl FromStr for Target {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let target = match s {
-            "tree" | "merkle-tree" => Self::Tree,
-            _ => return Err("Unknown taget. Available options are: tree"),
+            "tree" | "merkle-tree" => Ok(Self::Tree),
+            _ => Err("Unknown target. Available options are: tree"),
         };
 
-        Ok(target)
+        target
     }
 }
 
@@ -30,6 +30,7 @@ impl FromStr for Target {
 )]
 struct Options {
     /// Name of the target to run.
+    #[structopt(parse(try_from_str))]
     target: Target,
 }
 
